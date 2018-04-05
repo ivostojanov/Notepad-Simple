@@ -1,0 +1,10 @@
+C:\Users\Ivan\source\repos\Notepad - Simple\Notepad - Simple\bin\Release\Notepad - Simple.exe.config
+C:\Users\Ivan\source\repos\Notepad - Simple\Notepad - Simple\bin\Release\Notepad - Simple.exe
+C:\Users\Ivan\source\repos\Notepad - Simple\Notepad - Simple\bin\Release\Notepad - Simple.pdb
+C:\Users\Ivan\source\repos\Notepad - Simple\Notepad - Simple\obj\Release\Notepad___Simple.Form1.resources
+C:\Users\Ivan\source\repos\Notepad - Simple\Notepad - Simple\obj\Release\Notepad___Simple.Properties.Resources.resources
+C:\Users\Ivan\source\repos\Notepad - Simple\Notepad - Simple\obj\Release\Notepad - Simple.csproj.GenerateResource.cache
+C:\Users\Ivan\source\repos\Notepad - Simple\Notepad - Simple\obj\Release\Notepad - Simple.csproj.CoreCompileInputs.cache
+C:\Users\Ivan\source\repos\Notepad - Simple\Notepad - Simple\obj\Release\Notepad - Simple.exe
+C:\Users\Ivan\source\repos\Notepad - Simple\Notepad - Simple\obj\Release\Notepad - Simple.pdb
+C:\Users\Ivan\source\repos\Notepad - Simple\Notepad - Simple\obj\Release\Notepad - Simple.csprojResolveAssemblyReference.cache

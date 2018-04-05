@@ -15,6 +15,7 @@ namespace Notepad___Simple
     public partial class Form1 : Form
     {
         string openFilePath = null;
+        bool justSaved = false;
 
         public Form1(string openWithPath)
         {
@@ -32,18 +33,22 @@ namespace Notepad___Simple
                 {
                     fileText.LoadFile(openFilePath, RichTextBoxStreamType.PlainText);
                 }
-
-                openFilePath = openFilePath;
+                
                 this.Text = openFilePath;
             }
 
+            justSaved = true;
         }
 
         private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Content will be lost! Are you sure?", "Exit", MessageBoxButtons.YesNo);
+            DialogResult dr=DialogResult.No;
+            if (!justSaved)
+            {
+                dr = MessageBox.Show("Content will be lost!\nAre you sure?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            }           
 
-            if(dr == DialogResult.Yes)
+            if(justSaved || dr == DialogResult.Yes)
                 Application.Exit();
                 
         }
@@ -69,6 +74,7 @@ namespace Notepad___Simple
                     fileText.LoadFile(op.FileName, RichTextBoxStreamType.PlainText);
                 }
 
+                justSaved = true;
                 openFilePath = op.FileName;
                 this.Text = op.FileName;
             }
@@ -90,6 +96,7 @@ namespace Notepad___Simple
                 {
                     fileText.SaveFile(openFilePath, RichTextBoxStreamType.PlainText);
                 }
+                justSaved = true;
             }
         }
 
@@ -107,7 +114,7 @@ namespace Notepad___Simple
                 {
                     fileText.SaveFile(sf.FileName, RichTextBoxStreamType.PlainText);
                 }
-
+                justSaved = true;
                 openFilePath = sf.FileName;
                 this.Text = sf.FileName;
             }            
@@ -168,13 +175,13 @@ namespace Notepad___Simple
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Made by Ivan Stojanov", "About", MessageBoxButtons.OK);
+            MessageBox.Show("Made by Ivan Stojanov", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void printToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (printDialog1.ShowDialog() == DialogResult.OK)
-            {
+            {                
                 printDocument1.Print();
             }            
         }
@@ -223,6 +230,16 @@ namespace Notepad___Simple
 
             linesPrinted = 0;
             e.HasMorePages = false;
+        }
+
+        private void fileText_TextChanged(object sender, EventArgs e)
+        {
+            justSaved = false;
+        }
+
+        private void gitHubToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/ivostojanov/Notepad-Simple");
         }
         
     }
