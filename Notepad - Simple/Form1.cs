@@ -6,15 +6,37 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing.Printing;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Notepad___Simple
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        string openFilePath = null;
+
+        public Form1(string openWithPath)
         {
             InitializeComponent();
+                        
+            if (openWithPath != string.Empty)
+            {
+                openFilePath = openWithPath;
+                //Open the file
+                try
+                {
+                    fileText.LoadFile(openFilePath, RichTextBoxStreamType.RichText);
+                }
+                catch (Exception ex)
+                {
+                    fileText.LoadFile(openFilePath, RichTextBoxStreamType.PlainText);
+                }
+
+                openFilePath = openFilePath;
+                this.Text = openFilePath;
+            }
+
         }
 
         private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -29,32 +51,66 @@ namespace Notepad___Simple
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fileText.Clear();
+            this.Text = "Notepad - Simple";
+            openFilePath = null;
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog op = new OpenFileDialog();
+            op.Filter = "Text Document(*.txt)|*.txt|All Files(*.*)|";
             if (op.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    fileText.LoadFile(op.FileName, RichTextBoxStreamType.PlainText);
+                    fileText.LoadFile(op.FileName, RichTextBoxStreamType.RichText);
                 }catch(Exception ex)
                 {
-                    
+                    fileText.LoadFile(op.FileName, RichTextBoxStreamType.PlainText);
                 }
-                
+
+                openFilePath = op.FileName;
                 this.Text = op.FileName;
             }
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if(openFilePath == null)
+            {
+                saveAsToolStripMenuItem_Click(sender, e);
+            }
+            else
+            {
+                try
+                {
+                    fileText.SaveFile(openFilePath, RichTextBoxStreamType.RichText);
+                }
+                catch (Exception ex)
+                {
+                    fileText.SaveFile(openFilePath, RichTextBoxStreamType.PlainText);
+                }
+            }
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             SaveFileDialog sf = new SaveFileDialog();
             sf.Filter = "Text Document(*.txt)|*.txt|All Files(*.*)|";
             if (sf.ShowDialog() == DialogResult.OK)
-                fileText.SaveFile(sf.FileName, RichTextBoxStreamType.PlainText);
-            this.Text = sf.FileName;
+            {
+                try
+                {
+                    fileText.SaveFile(sf.FileName, RichTextBoxStreamType.RichText);
+                }
+                catch (Exception ex)
+                {
+                    fileText.SaveFile(sf.FileName, RichTextBoxStreamType.PlainText);
+                }
+
+                openFilePath = sf.FileName;
+                this.Text = sf.FileName;
+            }            
         }
 
         private void cutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -92,12 +148,21 @@ namespace Notepad___Simple
             }
         }
 
-        private void backgroundColorToolStripMenuItem_Click(object sender, EventArgs e)
+        private void backgroundColorToolStripMenuItem1_Click_1(object sender, EventArgs e)
         {
             ColorDialog colorDialog = new ColorDialog();
             if(colorDialog.ShowDialog() == DialogResult.OK)
             {
                 fileText.SelectionBackColor = colorDialog.Color;
+            }
+        }                     
+
+        private void colorToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                fileText.SelectionColor = colorDialog.Color;
             }
         }
 
@@ -106,13 +171,59 @@ namespace Notepad___Simple
             MessageBox.Show("Made by Ivan Stojanov", "About", MessageBoxButtons.OK);
         }
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sf = new SaveFileDialog();
-            sf.Filter = "Text Document(*.txt)|*.txt|All Files(*.*)|";
-            if (sf.ShowDialog() == DialogResult.OK)
-                fileText.SaveFile(sf.FileName, RichTextBoxStreamType.PlainText);
-            this.Text = sf.FileName;
+            if (printDialog1.ShowDialog() == DialogResult.OK)
+            {
+                printDocument1.Print();
+            }            
         }
+
+        private void printDocument1_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            char[] param = { '\n' };
+
+            if (printDialog1.PrinterSettings.PrintRange == PrintRange.Selection)
+            {
+                lines = fileText.SelectedText.Split(param);
+            }
+            else
+            {
+                lines = fileText.Text.Split(param);
+            }
+
+            int i = 0;
+            char[] trimParam = { '\r' };
+            foreach (string s in lines)
+            {
+                lines[i++] = s.TrimEnd(trimParam);
+            }
+        }
+
+        private int linesPrinted;
+        private string[] lines;
+
+        private void OnPrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            int x = e.MarginBounds.Left;
+            int y = e.MarginBounds.Top;
+            Brush brush = new SolidBrush(fileText.ForeColor);
+
+            while (linesPrinted < lines.Length)
+            {
+                e.Graphics.DrawString(lines[linesPrinted++],
+                    fileText.Font, brush, x, y);
+                y += 15;
+                if (y >= e.MarginBounds.Bottom)
+                {
+                    e.HasMorePages = true;
+                    return;
+                }
+            }
+
+            linesPrinted = 0;
+            e.HasMorePages = false;
+        }
+        
     }
 }
