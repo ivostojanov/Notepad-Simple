@@ -85,3 +85,5 @@ Link to the GitHub repository and information on the application
 Easy installation process to get you started with Notepad - Simple
 
 ![New Screenshot](https://github.com/ivostojanov/Notepad-Simple/blob/master/Screenshots/setup.png?raw=true)
+
+[Download here](https://github.com/ivostojanov/Notepad-Simple/blob/master/Setup/notepad_simple_setup.exe)
