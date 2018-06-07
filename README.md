@@ -79,3 +79,9 @@ Link to the GitHub repository and information on the application
 ## Example
 
 ![New Screenshot](https://github.com/ivostojanov/Notepad-Simple/blob/master/Screenshots/Screenshot_11.png?raw=true)
+
+## Last but not least | Setup
+
+Easy installation process to get you started with Notepad - Simple
+
+![New Screenshot](https://github.com/ivostojanov/Notepad-Simple/blob/master/Screenshots/setup.png?raw=true)
