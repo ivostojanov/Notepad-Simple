@@ -8,3 +8,13 @@ C:\Users\Ivan\source\repos\Notepad - Simple\Notepad - Simple\obj\Debug\Notepad -
 C:\Users\Ivan\source\repos\Notepad - Simple\Notepad - Simple\obj\Debug\Notepad - Simple.csproj.CoreCompileInputs.cache
 C:\Users\Ivan\source\repos\Notepad - Simple\Notepad - Simple\obj\Debug\Notepad - Simple.exe
 C:\Users\Ivan\source\repos\Notepad - Simple\Notepad - Simple\obj\Debug\Notepad - Simple.pdb
+C:\Users\ivost\source\repos\Notepad - Simple\Notepad - Simple\bin\Debug\Notepad - Simple.exe.config
+C:\Users\ivost\source\repos\Notepad - Simple\Notepad - Simple\bin\Debug\Notepad - Simple.exe
+C:\Users\ivost\source\repos\Notepad - Simple\Notepad - Simple\bin\Debug\Notepad - Simple.pdb
+C:\Users\ivost\source\repos\Notepad - Simple\Notepad - Simple\obj\Debug\Notepad - Simple.csprojResolveAssemblyReference.cache
+C:\Users\ivost\source\repos\Notepad - Simple\Notepad - Simple\obj\Debug\Notepad___Simple.Form1.resources
+C:\Users\ivost\source\repos\Notepad - Simple\Notepad - Simple\obj\Debug\Notepad___Simple.Properties.Resources.resources
+C:\Users\ivost\source\repos\Notepad - Simple\Notepad - Simple\obj\Debug\Notepad - Simple.csproj.GenerateResource.cache
+C:\Users\ivost\source\repos\Notepad - Simple\Notepad - Simple\obj\Debug\Notepad - Simple.csproj.CoreCompileInputs.cache
+C:\Users\ivost\source\repos\Notepad - Simple\Notepad - Simple\obj\Debug\Notepad - Simple.exe
+C:\Users\ivost\source\repos\Notepad - Simple\Notepad - Simple\obj\Debug\Notepad - Simple.pdb
